@@ -1,0 +1,75 @@
+  
+  <link rel="stylesheet" type="text/css" href="/static/css4menu.css">
+  
+  <div class="menu-bar"> 
+    <div class="menu-item">
+      <a href="/vhms/home">Home</a>
+    </div>
+    
+    <div class="menu-item">
+      <a href="/vhms/MedInfo/">Medical Info</a>
+    </div>
+    <div class="menu-item">
+      <a href="/vhms/medicines/">Medicines</a>
+    </div>
+    <div class="menu-item">
+      <a href="/vhms/doctors/">Doctors</a>
+    </div>
+    <div class="menu-item">
+      <a href="/vhms/hospitals/">Hospitals</a>
+    </div>
+    <div class="menu-item">
+      <a href="/vhms/Contact/">Contact Us</a>
+    </div>
+    |
+  {% if request.session.pid %}
+    {% if request.session.usertype == "doctor" %}
+    <div class="menu-item">
+      <a href="/vhms/user_profile/ ">Profile</a>
+    </div>
+   
+    <div class="menu-item">
+      <a href="/vhms/admission_by_doctor_data/">Admission</a>
+    </div>
+    <!-- <div class="menu-item">
+      <a href="/vhms/pet/{{animal.id}}">Treatment History</a>
+    </div> -->
+    <div class="menu-item">
+      <a href="/vhms/medicines/">Medicines</a>
+    </div>
+    <div class="menu-item">
+      <a href="/vhms/all_pets">All Pets</a>
+    </div>
+    {% else %} 
+   <div class="menu-item">
+      <a href="/vhms/pet_owner_profile">Profile</a>
+    </div>
+    <div class="menu-item">
+      <a href="/vhms/bill">Bill</a>
+    </div>
+    {% endif %}
+  <!-- common menu data -->
+  <div class="menu-item">
+      <a href="/vhms/animal_dashboard/">My Pets</a>
+    </div>
+  <div class="menu-item">
+      <a href="/vhms/add_pet">Add Pet</a>
+    </div>
+  <div style="float: right">
+     <div class="uname">
+        {{ request.session.pname }}
+      </div>
+      <div class="menu-item">
+        <a href="/vhms/logout">Logout</a>
+    </div>
+  </div>
+
+
+  {% else %}
+    <div class="menu-item">
+      <a href="/vhms/sign_up/">Sign Up</a>
+    </div>
+   {% endif %}
+  </div>
+
+

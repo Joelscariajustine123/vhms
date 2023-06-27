@@ -1,0 +1,152 @@
+{% csrf_token %}
+{% load static %}
+{% include 'menu.html' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+            background-image: url("/static/b_g/T2.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .left-side {
+            flex: 1;
+        }
+
+        .right-side {
+            flex: 1;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #245a46;
+            margin-bottom: 10px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+            object-position: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-details {
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .upload-input {
+            margin-bottom: 10px;
+        }
+        
+        .save-button {
+            background-color:#148F77;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        .save-button:hover {
+            background-color: #1b4733;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <h1>Doctor Profile</h1>
+            
+            <div class="profile-details"><!-- 
+                <img class="profile-image" src="{% if doctor.person.profile_image %}{{ doctor.person.profile_image.url }}{% else %}{% static 'default_profile_image.jpg' %}{% endif %}" alt="Profile Image"> -->
+                <form enctype="multipart/form-data" method="POST">
+                    <!-- 
+                    <input class="upload-input" type="file" name="profile_image"> -->
+                    <p class="label">Name:</p>
+                    <p>{{ doctor.person.get_full_name }}</p>
+                    <p class="label">Designation:</p>
+                    <p>{{ doctor.designation }}</p>
+                    <p class="label">Hospital:</p>
+                    <p>{{ doctor.hospital }}</p>
+                    <p class="label">Join Date:</p>
+                    <p>{{ doctor.joindate }}</p>
+                    <p class="label">Exit Date:</p>
+                    <p>{{ doctor.exitdate }}</p>
+                    <p class="label">Qualifications:</p>
+                    <p>{{ doctor.qualifications }}</p>
+                    <p class="label">Experience:</p>
+                    <p>{{ doctor.experience }}</p>
+                    <p class="label">Specialty:</p>
+                    <p>{{ doctor.specialty }}</p>
+                </form>
+            </div>
+        </div>
+        <div class="right-side">
+            <h1>Additional Information</h1>
+            <div class="profile-details">
+                <p class="label">Education:</p>
+                <p>{{ doctor.education }}</p>
+                <p class="label">Departments:</p>
+                <ul>
+                    {% for department in doctor.departments.all %}
+                        <li>{{ department.name }}</li>
+                    {% empty %}
+                        <li>No departments assigned</li>
+                    {% endfor %}
+                </ul>
+                <p class="label">Contact Number:</p>
+                <p>{{ doctor.person.phone }}</p>
+                <p class="label">Email:</p>
+                <p>{{ doctor.person.email }}</p>
+                <button class="save-button" type="submit">Save Changes</button>
+            </div>
+        </div>
+    </div>
+    <a class="back-link" href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

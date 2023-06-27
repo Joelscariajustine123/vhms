@@ -1,0 +1,119 @@
+ {% include "Menu.html"%}  
+ {% include "MedMenu.html"%}  
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Boxed Content with Sidebar</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+
+    }
+
+ 
+
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      padding: 20px;
+    }
+
+    .box {
+      flex-basis: calc(38% - 200px); /* Adjust based on the desired number of boxes per row */
+      border: 9px solid #ccc;
+      padding: 90px;
+      margin-bottom: 90px;
+      margin-right: 90px;
+      margin-left: 40px;
+    }
+
+    .small-box {
+      flex-basis: 200px;
+    }
+
+    .medium-box {
+      flex-basis: 400px;
+    }
+
+    .large-box {
+      flex-basis: 600px;
+    }
+
+    .box img {
+      max-width: 100%;
+      height: auto;
+    }
+     h1 {
+      font-size: 72px;
+      text-align: center center;
+      margin-top: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+  
+    <div class="content">
+        
+          
+ 
+    
+      <div class="box small-box">
+        <h2>Remember:</h2>
+        <p> Any first aid administered to your pet should be followed by immediate veterinary care. First aid care is not a substitute for veterinary care, but it may save your pet's life until it receives veterinary treatment.</p>
+        <p>
+            
+        </p>
+        <img src="/static/b_g/sick4.png" alt="Image 1">
+      </div>
+
+      <div class="box medium-box">
+        <h2>Ensuring Pet Safety and Preparedness in Disasters and Emergencies</h2>
+        <p>We always need to be prepared to take care of our animals, especially during disasters such as fire, flood, or other emergencies. In cases of fire or natural disasters, you need to be prepared in case your pet gets injured, lost, or has to be evacuated.</p>
+
+          <li>A pre-determined plan in case of a disaster will help you remain calm and think clearly.</li>  
+          <li>Remember to communicate and cooperate with all emergency personnel.</li>
+          <li>If you must leave the premises let someone know where you are going and try to remain in contact with that person.</li>
+
+        <img src="/static/b_g/sick2.png" alt="Image 2">
+      </div>
+
+      <div class="box large-box">
+        
+          <div class="header">
+                <h1>The Importance of Regular Exercise for Pets</h1>
+     </div>
+        
+        <p></p>
+        <ul>
+            <li>Regular exercise is essential for pets.</li> 
+            <li> It helps maintain a healthy weight.</li>
+            <li>Exercise promotes cardiovascular health.</li>
+            <li>It strengthens muscles and bones.</li>
+            <li>Physical activity provides mental stimulation and prevents boredom.</li>
+            <li>It reduces the risk of conditions like arthritis.</li> 
+            <li> Exercise alleviates anxiety, stress, and hyperactivity.</li> 
+            <li> It improves overall behavior.</li>
+            <li>Regular exercise strengthens the bond between pets and owners.</li>  
+            <li>It offers opportunities for socialization with other pets and people.</li>   
+            <li>   Engaging in activities like walking and playing fetch brings enjoyment.</li>  
+            <li> Exercise contributes to a healthy heart and cardiovascular fitness.</li>   
+            <li> It improves blood circulation and strengthens the heart muscles.</li>  
+            <li> Consult a veterinarian to create a tailored exercise plan for your pet.</li>
+        </ul>
+        <img src="/static/b_g/sick.png" alt="Image 3">
+      </div>
+
+
+    </div>
+  </div>
+
+</body>
+</html>
+
+
+

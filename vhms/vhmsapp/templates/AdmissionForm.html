@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <title>Admission </title>
+          <style type="text/css">
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+          </style>
+        {% include "Menu.html" %}  
+     </head>
+<body bgcolor="#EEDDC0">
+{% if request.session.pid %}
+{% if request.session.usertype == "doctor" %}
+ 	<div style="border-style:solid; border-size:2px;text-align:center; background-image:url('/static/b_g/T1.jpg'); background-size:cover;  color:rgb(255,50,100); border-color:yellow; ">
+	    <center><h2> New Admission :</h2> </center>   
+<form action="/vhms/admission_by_doctor_data/" method="post">
+<!-- <table align="center"> -->
+    {% csrf_token %}        
+ <table>
+ 	<tr>
+ 		<td>
+ 			<label for="id_admitedby">Dctor in charege of admission:</label> 
+			<select name="admitedby" id="id_admitedby">
+				{% for doctor in doctors %}
+					<option value="{{doctor.id}}">{{ doctor }}</option>
+				{% endfor %}
+			</select>
+ 		</td>
+ 		<td>
+			<label for="id_admissiondate">Admission Date:</label> 
+			<input type="date" name="admissiondate"  id="id_admissiondate"/>
+ 		</td>
+ 	</tr>
+ 	<tr>
+ 		<td>
+ 			<label for="id_animal">Animal / Pet</label> 
+			<select name="animal" id="id_animal">
+				{% for pet in pets %}
+					<option value="{{pet.id}}">{{ pet }}</option>
+				{% endfor %}
+			</select>
+ 		</td>
+ 		
+ 		<td>
+			<label for="id_dischargedate">Discharge Date:</label> 
+			<input type="date" name="dischargedate"  id="id_dischargedate" />
+			
+ 		</td>
+ 		<td>
+ 			<input type="submit" value="Submit" />
+			<input type="hidden" name="hd_id" value="0" id="hd_id">
+ 		</td>
+ 	</tr>
+
+ </table>   
+</form>
+	</div>
+{% endif %}
+{% endif %}   
+<div style="border-style:solid; border-size:2px;text-align:left; color:blue; border-color:purple; " >
+
+		<table border=".5" style="border-style: solid;" >
+			<caption>Admissions</caption>
+	<tr><th>Pet - Select the pet to enter treatment data </th><th>Doctor in Charge</th><th>Date in</th><th>Date out</th>
+{% for row in admissions %}
+	<tr>
+		<td><a href="/vhms/treatement/{{row.id}}/"><em>[{{row.id}}] </em>{{row.animal}}</a></td>
+		<td>{{row.admitedby}}</td>
+		<td>{{row.admissiondate}}</td>
+		<td>{{row.dischargedate}}</td>
+	</tr>
+{% endfor %}
+		</table>
+	
+
+</div>
+</body>
+</html>

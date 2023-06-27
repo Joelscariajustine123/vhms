@@ -1,0 +1,132 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include 'Menu.html' %}
+
+
+  <title>Profile</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      /*font-family: Arial, sans-serif;*/
+      background-image: url('/static/b_g/Y4.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .profile-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: rgba(242, 242, 242, 0.8);
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-header h1 {
+      color: #148F77;
+      font-size: 28px;
+    }
+
+    .profile-details {
+      margin-bottom: 20px;
+    }
+
+    .profile-details label {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .profile-details p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .logout-button {
+      text-align: center;
+    }
+
+    .logout-button a {
+      color: #148F77;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .logout-button a:hover {
+      text-decoration: underline;
+    }
+
+    .pet-container {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+    }
+
+    .pet-details {
+      margin-bottom: 10px;
+    }
+
+    .pet-details label {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 16px;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-header">
+      <h1>Your Profile</h1>
+    </div>
+    <div class="profile-details">
+     
+      <p>{{ request.session.pname }}</p>
+      
+      <p>{{ person.email }}</p>
+      
+      <p><label>Phone : </label> {{ person.phone }}</p>
+      <p><label>Address : </label> {{ person.house }} 
+{{ person.street}} 
+{{ person.locality}} 
+{{ person.city}} 
+{{ person.state}} 
+{{ person.pin}} 
+      </p>
+      <!-- Add more details as needed -->
+      {% if doctor %}
+        <p>{{ doctor.designation }} </p>
+        <p>{{ doctor.hospital }} </p>
+        <p>{{ doctor.specialty }} </p>
+        <p><label>Experience : </label>{{ doctor.experience }} <label>years </label></p>
+        <p>
+            <label> Department </label>
+          <ul>
+            {% for department in doctor.departments.all %}
+                <li>{{ department.name }}</li>
+            {% empty %}
+                <li>No departments assigned</li>
+            {% endfor %}
+        </ul>
+      </p>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

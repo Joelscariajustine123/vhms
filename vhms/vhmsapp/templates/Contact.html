@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>VHMS - Contact Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/static/b_g/j.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+       .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Adjust the alpha value (0.0 - 1.0) to change transparency */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            padding: 8px 16px;
+            background-color: #2C8D7A;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #contact-details {
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        p {
+            margin: 8px 0;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 20px;
+        }
+    </style>
+    {% include "Menu.html"%}  
+</head>
+
+<body>
+    <div class="container">
+        <h1>Contact Us</h1>
+
+        <form id="search-form" action="{% url 'Contact' %}" method="GET">
+            <input type="text" name="hospital_name" placeholder="Enter hospital name">
+            <button type="submit">Search</button>
+        </form>
+
+        <div id="contact-details">
+            {% if hospitals %}
+                {% for hospital in hospitals %}
+                    <h2>{{ hospital.name }}</h2>
+                    <p>Address: {{ hospital.address }}</p>
+                    <p>City: {{ hospital.city }}</p>
+                    <p>State: {{ hospital.state }}</p>
+                    <p>Country: {{ hospital.country }}</p>
+                    <p>Phone: {{ hospital.phone }}</p>
+                    <p>Email: {{ hospital.email }}</p>
+                    <hr>
+                {% endfor %}
+            {% elif error_message %}
+                <p class="error-message">{{ error_message }}</p>
+            {% endif %}
+        </div>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Veterinary Clinic</title>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="/static/styles.css">
+  {% include "menu.html"%}
+</head>
+
+<body>
+  <div class="header">
+    <h1>VETERINARY HOSPITAL MANAGEMENT SYSTEM</h1>
+  </div>
+  
+
+  <div class="right"
+    <main>
+      <h2>About Us</h2>
+      <p>At Veterinary Clinic, we are committed to providing the highest quality care for your pets. Our team of experienced veterinarians and veterinary technicians are passionate about animals and dedicated to keeping your pets healthy and happy.</p>
+      <p>We offer a wide range of services, including routine check-ups, vaccinations, spaying/neutering, dental care, and surgery. We use state-of-the-art equipment and techniques to ensure that your pet receives the best possible care.</p>
+      <p>In addition to our medical services, we also offer boarding and grooming services to keep your pets looking and feeling their best. Our staff is trained to provide personalized care and attention to each and every pet that stays with us.</p>
+      <p>At Veterinary Clinic, we understand that your pets are members of your family. That's why we treat each and every pet with the same care and compassion that we would want for our own pets.</p>
+      <p>Thank you for choosing Veterinary Clinic for your pet's healthcare needs. We look forward to serving you and your furry family members.</p>
+    </main>
+  </div>
+{% if request.session.pid %}
+{% else %}
+  <div class="left">
+    <form method="POST" action="/vhms/login/">
+      {% csrf_token %}
+      <h2>Veterinary Hospital Management</h2>
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password">
+      <input type="submit" value="Log In">
+    </form>
+  </div>
+{% endif %}
+</body>
+
+</html>

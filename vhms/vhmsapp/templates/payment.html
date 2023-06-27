@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .total {
+            font-weight: bold;
+        }
+        .btn {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bill</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Treatment</th>
+                    <th>Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for treatment in treatments %}
+                <tr>
+                    <td>{{ treatment.name }}</td>
+                    <td>{{ treatment.cost }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Medicine</th>
+                    <th>Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for medicine in medicines %}
+                <tr>
+                    <td>{{ medicine.name }}</td>
+                    <td>{{ medicine.cost }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <h3>Total Bill: ${{ total_bill }}</h3>
+        
+        <form method="POST" action="{% url 'payment' %}">
+            {% csrf_token %}
+            <input type="hidden" name="total_bill" value="{{ total_bill }}">
+            <button type="submit" class="btn btn-primary">Pay Now</button>
+        </form>
+    </div>
+</body>
+</html>

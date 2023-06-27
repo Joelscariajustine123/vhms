@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hospitals and Departments</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            background-image: url('/static/b_g/D1.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            /*font-family: Arial, sans-serif;*/
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 32px;
+        }
+
+        .hospital-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);*/
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+            overflow-y: scroll;
+        }
+
+        .hospital-info {
+            max-width: 800px;
+            margin: 2 auto;
+            padding: 10px;
+            background-color: rgba(205, 205, 155, 0.9);
+            /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);*/
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+        }
+
+        .hospital-name {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .department-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .department-item {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid #333;
+        }
+
+        .department-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .doctor-list {
+            list-style-type: none;
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .doctor-item {     
+            margin-bottom: 5px;
+            color: #666;
+        }
+    </style>
+    {% include "Menu.html"%}  
+
+</head>
+
+<body>
+    <div class="hospital-container">
+        <h1>Hospitals and Departments</h1>
+        {% for hospital in hospitals %}
+        <div class="hospital-info">
+            <h3 class="hospital-name">{{ hospital.name }}</h3>
+            <p>Departments:</p>
+            <ul class="department-list">
+                {% for department in hospital.departments.all %}
+                <li class="department-item">
+                    <strong>{{ department.name }}</strong>
+                    {% if department.doctor_set.all %}
+                    <ul class="doctor-list">
+                        {% for doctor in department.doctor_set.all %}
+                        <li class="doctor-item">
+                            <span style="font-weight: bold;font-style: italic;">Doctor:</span> {{ doctor.person.get_full_name }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pet Added</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("/static/b_g/T1.jpg"); /* Replace with the path to your background image */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .profile-link {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pet Added Successfully!</h1>
+        <p>Thank you for adding your pet.</p>
+        <a class="profile-link" href="{% url 'pet_owner_profile' %}">Go to Profile</a>
+    </div>
+</body>
+</html>

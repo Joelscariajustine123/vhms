@@ -1,0 +1,165 @@
+{% include "menu_regular.html"%}  
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hospital Selection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('/static/b_g/o1.png');
+      background-color: #f2f2f2;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      color: #333333;
+      margin-bottom: 10px;
+    }
+
+    .label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    select {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+
+    .book-appointment-button {
+      display: block;
+      width: 150px;
+      margin: 20px auto;
+      padding: 10px;
+      text-align: center;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .book-appointment-button:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Load hospitals from the database
+      $.get("/get_hospitals/", function(data) {
+        var hospitals = JSON.parse(data);
+
+        // Populate hospital select options
+        var hospitalSelect = $("#hospital-select");
+        hospitalSelect.empty();
+        hospitalSelect.append($('<option disabled selected>Select Hospital</option>'));
+        $.each(hospitals, function(index, hospital) {
+          hospitalSelect.append($('<option>', {
+            value: hospital.id,
+            text: hospital.name
+          }));
+        });
+      });
+
+      // Load departments when a hospital is selected
+      $("#hospital-select").change(function() {
+        var selectedHospitalId = $(this).val();
+        $.get("/get_departments/", {hospital_id: selectedHospitalId}, function(data) {
+          var departments = JSON.parse(data);
+
+          // Populate department select options
+          var departmentSelect = $("#department-select");
+          departmentSelect.empty();
+          departmentSelect.append($('<option disabled selected>Select Department</option>'));
+          $.each(departments, function(index, department) {
+            departmentSelect.append($('<option>', {
+              value: department.id,
+              text: department.name
+            }));
+          });
+
+          // Clear the doctor select options
+          var doctorSelect = $("#doctor-select");
+          doctorSelect.empty();
+          doctorSelect.append($('<option disabled selected>Select Doctor</option>'));
+        });
+      });
+
+      // Load doctors when a department is selected
+      $("#department-select").change(function() {
+        var selectedDepartmentId = $(this).val();
+        $.get("/get_doctors/", {department_id: selectedDepartmentId}, function(data) {
+          var doctors = JSON.parse(data);
+
+          // Populate doctor select options
+          var doctorSelect = $("#doctor-select");
+          doctorSelect.empty();
+          doctorSelect.append($('<option disabled selected>Select Doctor</option>'));
+          $.each(doctors, function(index, doctor) {
+            doctorSelect.append($('<option>', {
+              value: doctor.id,
+              text: doctor.name
+            }));
+          });
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <form method="POST" action="{% url 'make_appointment' %}">
+    {% csrf_token %}
+    <div class="container">
+      <div class="header">
+        <h1>Hospital Selection</h1>
+        <p>Select a hospital and department to find doctors.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="label" for="hospital-select">Select a Hospital:</label>
+        <select id="hospital-select" name="hospital">
+          <option disabled selected>Select Hospital</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="label" for="department-select">Select a Department:</label>
+        <select id="department-select" name="department">
+          <option disabled selected>Select Department</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="label" for="doctor-select">Select a Doctor:</label>
+        <select id="doctor-select" name="doctor">
+          <option disabled selected>Select Doctor</option>
+        </select>
+      </div>
+
+      <button type="submit" class="book-appointment-button">Book Appointment</button>
+    </div>
+  </form>
+</body>
+</html>
+
