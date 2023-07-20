@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Medical Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .btn {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Update Medical Data</h2>
+        <form method="POST" action="{% url 'update_medical_data' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="pet_name">Pet Name</label>
+                <input type="text" class="form-control" id="pet_name" name="pet_name" required>
+            </div>
+            <div class="form-group">
+                <label for="owner_name">Owner Name</label>
+                <input type="text" class="form-control" id="owner_name" name="owner_name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="weight">Weight</label>
+                <input type="number" class="form-control" id="weight" name="weight" required>
+            </div>
+            <div class="form-group">
+                <label for="height">Height</label>
+                <input type="number" class="form-control" id="height" name="height" required>
+            </div>
+            <div class="form-group">
+                <label for="diagnosis">Diagnosis</label>
+                <textarea class="form-control" id="diagnosis" name="diagnosis" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="medication">Medication</label>
+                <textarea class="form-control" id="medication" name="medication" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="treatment_date">Treatment Date</label>
+                <input type="date" class="form-control" id="treatment_date" name="treatment_date" required>
+            </div>
+            <div class="form-group">
+                <label for="next_visit_date">Next Visit Date</label>
+                <input type="date" class="form-control" id="next_visit_date" name="next_visit_date" required>
+            </div>
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea class="form-control" id="notes" name="notes"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</body>
+</html>

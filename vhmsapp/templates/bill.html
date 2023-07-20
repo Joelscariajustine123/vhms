@@ -1,0 +1,85 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bill</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        h2 {
+            color: #666;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .total-bill {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #2C8D7A;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #206956;
+        }
+    </style>
+</head>
+    {% include "Menu.html"%}  
+<body>
+    <h1>Bill Page</h1>
+
+    <h2>Treatments:</h2>
+    <ul>
+        {% for treatment in treatments %}
+            <li>{{ treatment.name }} - ${{ treatment.cost }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Medicines:</h2>
+    <ul>
+        {% for medicine in medicines %}
+            <li>{{ medicine.medicinename }} - ${{ medicine.sale_price }}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="total-bill">
+        <h2>Total Bill: Rs.{{ total_bill }}</h2>
+    </div>
+
+    <form action="{% url 'payment_processing' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Process Payment</button>
+    </form>
+</body>
+</html>

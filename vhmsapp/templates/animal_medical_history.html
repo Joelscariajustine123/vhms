@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Animal Medical History</title>
+</head>
+<body>
+    <h1>Animal Medical History</h1>
+    <h2>{{ animal.animalname }}</h2>
+    <ul>
+        {% for treatment in treatments %}
+        <li>
+            <p>Treatment Name: {{ treatment.medicine }}</p>
+            <p>Treatment Cost: ${{ treatment.medicine.sale_price }}</p>
+            <p>Treatment Date: {{ treatment.treatmentdate }}</p>
+            <p>Note: {{ treatment.note }}</p>
+        </li>
+        {% empty %}
+        <li>No medical history available for this animal.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

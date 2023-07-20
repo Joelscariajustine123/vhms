@@ -1,0 +1,96 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }} </title>
+    <style>
+        body {
+            background-image: url("/static/b_g/yu.jpg");
+            /*font-family: Arial, sans-serif;*/
+            background-color: #f4f4f4;
+            /*padding: .5px;*/
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .animal-card {
+            display: inline-block;
+            width: 300px;
+            background-color: #fff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .animal-card__name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .animal-card__info {
+            margin-bottom: 10px;
+        }
+
+        .animal-card__info label {
+            font-weight: bold;
+        }
+
+        .animal-card__info span {
+            margin-left: 5px;
+        }
+        .animal-card__image span {
+            /*margin-left: 0px;*/
+            align-items: center;
+        }
+
+        .no-animals {
+            text-align: center;
+            color: #777;
+            font-style: italic;
+        }
+    </style>
+    {% include 'Menu.html' %}
+    
+</head>
+<body>
+    <!-- <h1>My Pets</h1> -->
+    {% if animals %}
+        {% for animal in animals %}
+            <div class="animal-card">
+                <div class="animal-card__name">{{ animal.name }}</div>
+                <div class="animal-card__info">
+                    <label>Species:</label>
+                    <span>{{ animal.species }}</span>
+                </div>
+                <div class="animal-card__info">
+                    <label>Breed:</label>
+                    <span>{{ animal.breed }}</span>
+                </div>
+                <div class="animal-card__info">
+                    <label>Age:</label>
+                    <span>{{ animal.age }}</span>
+                </div>
+
+                {% if animal.image %}
+                    <div class="animal-card__image">
+                        <img src="/vhms{{ animal.image.url }}" alt="{{ animal.name }} Photo"
+                         width="200" height="160">
+                    </div>
+                {% endif %}
+                <div class="animal-card__info">
+                    <label>Owner: [{{animal.owner.id}}]</label>
+                    <span>{{ animal.owner }}  </span>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="no-animals">No animals registered.</div>
+    {% endif %}
+</body>
+</html>

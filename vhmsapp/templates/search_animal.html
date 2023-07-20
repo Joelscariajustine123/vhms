@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VHMS - Search Animal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            font-size: 16px;
+        }
+        button[type="submit"] {
+            padding: 8px 16px;
+            background-color: #2C8D7A;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #animal-details {
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+        p {
+            margin: 8px 0;
+        }
+        .error-message {
+            color: #ff0000;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search Animal</h1>
+        <form method="GET" action="{% url 'search_animal' %}">
+            <input type="text" name="animal_id" placeholder="Enter Animal ID">
+            <button type="submit">Search</button>
+        </form>
+        <div id="animal-details">
+            {% if animal %}
+                <h2>{{ animal.name }}</h2>
+                <p>ID: {{ animal.id }}</p>
+                <p>Age: {{ animal.age }}</p>
+                <p>Species: {{ animal.species }}</p>
+                <p>Breed: {{ animal.breed }}</p>
+                <p>Colour: {{ animal.colour }}</p>
+                <p>Gender: {{ animal.gender }}</p>
+                <p>Note: {{ animal.note }}</p>
+                <hr>
+            {% elif error_message %}
+                <p class="error-message">{{ error_message }}</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

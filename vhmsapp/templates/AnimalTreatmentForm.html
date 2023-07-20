@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <title>Admission </title>
+          <style type="text/css">
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        input[type="date"],
+        input[type="number"]{
+        	padding: 3px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .card {
+            background-color: rgba(.1, .1, 0, 0.8);
+            font-size: 14pt;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            color:rgb(200, 200, 230);
+        }
+
+          </style>
+<script>
+function dateCheck(){
+	var t1=document.getElementById("dt_admisiondate").value;
+	var t2=document.getElementById("id_treatmentdate").value;
+	
+	// var one_day=1000*60*60*24;
+	var x=t1.split("/");
+	// var y=t2.split("/");
+	var d1=new Date(x[2],(x[1]-1),x[0]);
+	d2 = new Date(t2)
+	if (d1 > d2){
+		alert("Nooo" + d1 + " " + d2);
+		document.getElementById("bt_submit").style.display='none';
+	}
+
+	else{
+		alert("Yes" + d1 + " " + d2);
+		document.getElementById("bt_submit").style.display='block';
+	}
+	
+}
+</script>
+{% include "Menu.html" %}  
+     </head>
+<body bgcolor="#EEDDC0">
+<div class="card">
+	<em>Pet Animal : </em> {{admission.animal}} <br />
+	<em>Doctor in charge :  </em> {{admission.admitedby}} <br />
+	<em>Admission date : </em> {{admission.admissiondate}} <br />
+	<em>Discharged/discharging date :  </em> {{admission.dischargedate}} <br />
+
+</div>
+{% if request.session.pid %}
+{% if request.session.usertype == "doctor" %}
+ 	<div style="border-style:solid; border-size:2px;text-align:center; background-image:url('/static/b_g/T1.jpg'); background-size:cover;  color:rgb(255,50,100); border-color:yellow; ">
+	    <center><h3> Medication/Treatment </h3> </center>
+     
+<form action="/vhms/treatement/{{admission.id}}/" method="post">
+{% csrf_token %}
+ <table>
+ 	<tr>
+ 		<td style="text-align: left; width: 680px;">
+ 			Admission Date <input type="text" readonly="1" 
+ 			value='{{ admission.admissiondate|date:"j/m/Y" }}'
+ 			style="width: 150px; background-color: wheat; text-align: center;" id="dt_admisiondate">
+ 			<label for="id_treatmentdate">Treatment Date:</label> 
+			<input type="date" name="treatmentdate"  id="id_treatmentdate" onchange="dateCheck()" /><br />
+ 			<label for="id_admitedby">Dctor in charege :</label> 
+			<select name="admitedby" id="id_admitedby">
+				{% for doctor in doctors %}
+					<option value="{{doctor.id}}">{{ doctor }}</option>
+				{% endfor %}
+			</select> <br />
+			
+			<label for="id_medicine">Medicine:</label> 
+			<select name="admitedby" id="id_medicine">
+				{% for medicine in medicines %}
+					<option value="{{medicine.id}}">{{ medicine }}</option>
+				{% endfor %}
+			</select> <br />
+			<label for="id_quantity">Quantity of Medicine:</label> 
+			<input type="number" name="quantity"  id="id_quantity"/> <br />
+
+			<label for="id_doctorfee">Doctors fee:</label> 
+			<input type="number" name="doctorfee"  id="id_doctorfee"/><br />
+
+			<label for="id_nursingfee">Nursing fee:</label> 
+			<input type="number" name="nursingfee"  id="id_nursingfee"/><br />
+
+			<label for="id_hospitalfee">Hospital fee:</label> 
+			<input type="number" name="hospitalfee"  id="id_hospitalfee"/><br />
+
+			<label for="id_note">Comments if any on the treament</label> 
+			<input type="text" name="note"  id="id_note"/><br />
+
+
+ 		</td>
+ 	</tr>
+ 	<tr><td style="text-align: center;"> 
+ 		<input type="submit" value="Submit" id="bt_submit" />
+		<input type="hidden" name="hd_id" value="0" id="hd_id">
+ 	 </td></tr>
+ 	
+
+ </table>   
+</form>
+	</div>
+{% endif %}
+{% endif %}       
+<div style="border-style:solid; border-size:2px;text-align:left; color:blue; border-color:purple; " >
+
+		<table border=".5" style="border-style: solid;" >
+			<caption>Admissions</caption>
+	<tr><th>Pet - Select the pet to enter treatment data <br />Doctor in Charge</th>
+
+		<th>Date in <br /> Date out</th>
+{% for row in admissions %}
+	<tr>
+		<td><a href="/vhms/treatement/{{row.id}}/">{{row.animal}}</a> <em>[{{row.id}}] </em> <br /> {{row.admitedby}}</td>
+		<td>{{row.admissiondate}} <br /> {{row.dischargedate}}</td>
+	</tr>
+{% endfor %}
+		</table>
+	
+
+</div>
+</body>
+</html>

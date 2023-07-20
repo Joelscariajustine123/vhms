@@ -1,0 +1,106 @@
+
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100vh;
+      background-color: #A2D9CE;
+      padding: 20px;
+      display: none; /* Initially hidden */
+      font-size: 18px;
+    }
+
+    #sidebar a {
+      display: block;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: #196F3D;
+    }
+
+    #sidebar a:first-child {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    #content {
+      margin-left: 200px;
+      padding: 20px;
+    }
+
+    #toggle-button {
+      position: fixed;
+      top: 50px;
+      left: 20px;
+      cursor: pointer;
+      font-size: 24px;
+      padding: 10px;
+      background-color: #A9DFBF;
+      border: none;
+      border-radius: 4px;
+      color: #1E8449;
+    }
+
+    #sidebar:hover {
+      width: 250px;
+      color: #28B463;
+    }
+    #toggle-button:hover {
+      background-color: #056539 ;
+      color: #fff;
+    }
+
+    #toggle-button:focus {
+      outline: none;
+    }
+    /* Additional styling for the sidebar links */
+    #sidebar a:hover {
+      color: #1E8449;
+    }
+
+    #sidebar a.active {
+      color: #1E8449;
+      font-weight: bold;
+    }
+
+  </style>
+
+  <div id="toggle-button">&#9776;</div>
+
+  <div id="sidebar">
+    <a href="/vhms1/MI_p1/">First aid tips for pet owners</a>
+    <a href="/vhms1/MI_p2/">Skin abscesses or lacerations</a>
+    <a href="/vhms1/MI_p5/">Internal Bleeding</a>
+    <a href="/vhms1/MI_p4/">Fracture Repair </a>
+    <a href="/vhms1/MI_p6/">Intestinal obstruction due to foreign body</a>
+    <a href="/vhms1/MI_p7/">Torn cruciate or ACL ruptures</a>
+    <a href="/vhms1/MI_p8/">Masses and Tumors in Pet Animals</a>
+ 
+   
+    <!-- Add more links as needed -->
+  </div>
+  
+  <div id="content">
+    <!-- Your content goes here -->
+  </div>
+
+  <script>
+    const toggleButton = document.getElementById('toggle-button');
+    const sidebar = document.getElementById('sidebar');
+
+    toggleButton.addEventListener('click', () => {
+      sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+    });
+
+    sidebar.addEventListener('mouseleave', () => {
+      sidebar.style.display = 'none';
+    });
+  </script>

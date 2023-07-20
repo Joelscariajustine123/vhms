@@ -1,0 +1,89 @@
+{% include 'menu_doctor.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Doctor Appointments</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+    }
+    
+    .appointment-container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      color: #148F77;
+      margin-top: 0;
+      font-size: 24px;
+      text-align: center;
+    }
+    
+    .appointment-list {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+    
+    .appointment-list li {
+      background-color: #f2f2f2;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    
+    .appointment-list li:last-child {
+      margin-bottom: 0;
+    }
+    
+    .appointment-details {
+      color: #555;
+      font-size: 16px;
+    }
+    
+    .appointment-details p {
+      margin: 5px 0;
+    }
+    
+    .appointment-details .title {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="appointment-container">
+    <h1>Doctor Appointments</h1>
+    <ul class="appointment-list">
+      {% for doctor_appointment in doctor_appointments %}
+        <li>
+          <div class="appointment-details">
+            <p class="title">Animal:</p>
+            <p>{{ doctor_appointment.animal }}</p>
+          
+            <p class="title">Appointment Date:</p>
+            <p>{{ doctor_appointment.appointmentdate }}</p>
+            <p class="title">Start Time:</p>
+            <p>{{ doctor_appointment.starttime }}</p>
+            <p class="title">End Time:</p>
+            <p>{{ doctor_appointment.endtime }}</p>
+            <p class="title">Note:</p>
+            <p>{{ doctor_appointment.note }}</p>
+          </div>
+        </li>
+      {% empty %}
+        <li>No appointments available</li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>

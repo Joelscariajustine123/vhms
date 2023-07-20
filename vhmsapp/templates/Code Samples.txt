@@ -1,0 +1,14 @@
+
+//session testing
+{% if request.session.username %}
+    <!-- Session variable 'username' is set -->
+    <p>Welcome, {{ request.session.username }}!</p>
+{% else %}
+    <!-- Session variable 'username' is not set -->
+    <p>Please log in.</p>
+{% endif %}
+
+request.session["loginid"] = un
+request.session["pid"] = prsn.id
+request.session["pname"] = f"{prsn.title} {prsn.fname} {prsn.lname}"
+request.session["usertype"]="doctor"

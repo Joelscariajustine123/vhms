@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Animal Treatment Record</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    <label for="animal">Select Animal:</label>
+    <select name="animal" id="animal">
+      {% for animal in animals %}
+        <option value="{{ animal.id }}">{{ animal.name }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="treatment">Treatment:</label>
+    <input type="text" name="treatment" id="treatment">
+
+    <label for="cost">Cost:</label>
+    <input type="text" name="cost" id="cost">
+
+    <button type="submit">Save Treatment</button>
+  </form>
+{% endblock %}
